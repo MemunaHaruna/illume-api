@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get 'login/google', to: redirect('/auth/google_oauth2')
+  get 'login/facebook', to: redirect('/auth/facebook')
   get 'logout', to: 'sessions#destroy'
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
