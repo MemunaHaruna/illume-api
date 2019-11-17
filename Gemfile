@@ -25,6 +25,21 @@ gem 'puma', '~> 3.11'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'jwt'
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'kaminari'
+
+gem 'omniauth'
+
+# Use Omniauth Facebook plugin
+gem 'omniauth-facebook'
+
+# Use Omniauth Google plugin
+gem 'omniauth-google-oauth2', '~> 0.8.0'
+
+# Use Omniauth Twitter plugin
+gem 'omniauth-twitter'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
@@ -33,6 +48,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'
+  gem 'dotenv-rails'
 end
 
 group :development do
