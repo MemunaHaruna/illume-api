@@ -5,5 +5,5 @@ class Quote < ApplicationRecord
   enum access: %w[open hidden]
   enum source_type: %w[Original, Book, Movie, Song, Talk, Article, Journal, Other]
 
-  scope :visible, -> (current_user){ open.or(where(user: current_user))}
+  scope :visible_to, -> (current_user){ open.or(where(user: current_user))}
 end
