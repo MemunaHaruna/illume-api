@@ -13,4 +13,10 @@ class User < ApplicationRecord
       user.save!
     end
   end
+
+  def self.send_qotd_notification!
+    # TO-DO
+    # Fetch the qotd from the DB
+    # Send actioncable notification
+  end
 end

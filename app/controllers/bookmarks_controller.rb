@@ -18,7 +18,7 @@ class BookmarksController < ApplicationController
 
   def destroy
     @bookmark.destroy
-    head :no_content
+    json_basic_response(message: "Successfully deleted bookmark")
   end
 
   private

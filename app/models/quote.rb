@@ -8,4 +8,16 @@ class Quote < ApplicationRecord
 
   scope :visible_to, -> (current_user){ open.or(where(user: current_user))}
   scope :recent_first, -> { order("id DESC") }
+
+  def self.set_quote_of_the_day!
+    current_qotd = Quote.find_by(is_qotd: true)
+    current_qotd.update(is_qotd: false) if current_qotd
+
+    sql = "SELECT quote_id FROM bookmarks GROUP BY quote_id ORDER BY COUNT(quote_id) DESC LIMIT 1"
+    quote_id = ActiveRecord::Base.connection.execute(sql)[0]["quote_id"]
+    find(quote_id).update(is_qotd: true)
+
+    # Should this be saved in the database? yes, until I can find a better way
+    # How to resolve the issue where the same qotd may appear on more than 1 day since it depends on no. of bookmarks?
+  end
 end

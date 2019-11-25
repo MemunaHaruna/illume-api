@@ -52,6 +52,7 @@ class QuotesFinder
       .or(query.where("author LIKE ? ", "%#{params[:q].titlecase}%"))
       .or(query.where("content LIKE ? ",  "%#{params[:q]}%"))
     end
+    query
   end
 end
 

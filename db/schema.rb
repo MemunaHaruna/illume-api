@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_155724) do
+ActiveRecord::Schema.define(version: 2019_11_25_192759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_11_25_155724) do
     t.integer "access", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_qotd", default: false, null: false
     t.index ["user_id"], name: "index_quotes_on_user_id"
   end
 
