@@ -1,5 +1,6 @@
 class Quote < ApplicationRecord
   belongs_to :user
+  has_many :bookmarks
   has_and_belongs_to_many :tags
 
   enum access: %w[open hidden]
