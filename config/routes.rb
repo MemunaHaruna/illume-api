@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   resources :quotes
   resources :users, only: :show do
     get :quotes, on: :member
+
+    resources :bookmarks
   end
 end
