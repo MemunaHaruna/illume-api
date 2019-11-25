@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
 
-  resources :quotes do
-    get :search, on: :collection
+  resources :quotes
+  resources :users, only: :show do
+    get :quotes, on: :member
   end
 end
