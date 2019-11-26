@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   resources :quotes do
     get :qotd, on: :collection
+    get :personal_quotes, on: :collection
   end
+
   resources :users, only: :show do
     get :quotes, on: :member
 
