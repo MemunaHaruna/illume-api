@@ -9,6 +9,8 @@ class Quote < ApplicationRecord
   scope :visible_to, -> (current_user){ open.or(where(user: current_user))}
   scope :recent_first, -> { order("id DESC") }
 
+  before_save :titlecase_author_and_title
+
   def self.set_quote_of_the_day!
     current_qotd = Quote.find_by(is_qotd: true)
     current_qotd.update(is_qotd: false) if current_qotd
@@ -19,5 +21,10 @@ class Quote < ApplicationRecord
 
     # Should this be saved in the database? yes, until I can find a better way
     # How to resolve the issue where the same qotd may appear on more than 1 day since it depends on no. of bookmarks?
+  end
+
+  def titlecase_author_and_title
+    self.author = author.titlecase if author
+    self.source_title = source_title.titlecase if source_title
   end
 end
