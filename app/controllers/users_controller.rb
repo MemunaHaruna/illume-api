@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def quotes
-    quotes_list = @user.quotes.visible_to(@current_user).recent_first
+    quotes_list = QuotesFinder.new(params: params, base_query: base_query).filter
     quotes_list = quotes_list.page(params[:page]).per(params[:per_page] || 10)
     json_response(data: quotes_list, message: "Successfully fetched quotes for User")
   end
@@ -15,5 +15,9 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params.require(:id))
+  end
+
+  def base_query
+    @user.quotes.visible_to(@current_user)
   end
 end

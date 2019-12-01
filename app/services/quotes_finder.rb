@@ -1,22 +1,23 @@
 class QuotesFinder
-  def initialize(params, current_user)
+  def initialize(params:, base_query:)
     @params = params || {}
-    @current_user = current_user
+    @base_query = base_query || Quote.includes(:tags, :user).all
   end
 
   def filter
-    query = Quote.includes(:tags, :user).visible_to(current_user)
+    query = base_query
 
     query = filter_by_author(query)
     query = filter_by_tag(query)
     query = filter_by_source_title(query)
     query = filter_by_quote_text(query)
     query = filter_by_all_params(query)
+    query.recent_first
   end
 
   private
 
-  attr_reader :params, :current_user
+  attr_reader :params, :base_query
 
   def filter_by_tag(query)
     if params[:tags]

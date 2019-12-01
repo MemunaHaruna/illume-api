@@ -11,8 +11,12 @@ class TagsController < ApplicationController
       tags = tags.page(params[:page]).per(params[:per_page] || 50)
       json_response(status: :ok, data: tags, message: "Tag already exists")
     else
-      tag = Tag.create! create_params
-      return json_response(data: tag, message: "Successfully created a tag")
+      begin
+        tag = Tag.create! create_params
+        return json_response(data: tag, message: "Successfully created a tag")
+      rescue => error
+        json_error_response(message: "Error while creating a tag", errors: error.message)
+      end
     end
   end
 
