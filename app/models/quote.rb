@@ -3,6 +3,8 @@ class Quote < ApplicationRecord
   has_many :bookmarks
   has_and_belongs_to_many :tags
 
+  validates_presence_of :content
+
   enum access: %w[open hidden]
   enum source_type: %w[Original, Book, Movie, Song, Talk, Article, Journal, Other]
 
@@ -21,6 +23,7 @@ class Quote < ApplicationRecord
 
     # Should this be saved in the database? yes, until I can find a better way
     # How to resolve the issue where the same qotd may appear on more than 1 day since it depends on no. of bookmarks?
+    # What if no quote has been bookmarked?
   end
 
   def titlecase_author_and_title

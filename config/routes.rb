@@ -21,4 +21,6 @@ Rails.application.routes.draw do
 
     resources :bookmarks
   end
+
+  resources :tags
 end

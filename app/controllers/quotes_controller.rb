@@ -29,7 +29,7 @@ class QuotesController < ApplicationController
     if @quote.update quote_params
       json_response(data: @quote, message: "Successfully updated a quote")
     else
-      json_error_response(message: "Successfully updated a quote", errors: @quote.errors.full_messages)
+      json_error_response(message: "Error while updating a quote", errors: @quote.errors.full_messages)
     end
   end
 
