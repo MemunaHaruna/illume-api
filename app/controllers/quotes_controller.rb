@@ -2,18 +2,18 @@ class QuotesController < ApplicationController
   before_action :set_quote, only: [:update, :destroy]
 
   def index
-    quotes = QuotesFinder.new(params, @current_user).filter.recent_first
+    quotes = QuotesFinder.new(params: params, base_query: base_query).filter
     quotes = quotes.page(params[:page]).per(params[:per_page] || 10)
     json_response(status: :ok, data: quotes)
   end
 
   def show
-    quote = Quote.includes(:tags, :user).visible_to(@current_user).find(params[:id])
+    quote = base_query.find(params[:id])
     json_response(data: quote, message: "Successfully fetched a quote")
   end
 
   def personal_quotes
-    quotes = @current_user.quotes.recent_first
+    quotes = QuotesFinder.new(params: params, base_query: @current_user.quotes).filter
     quotes = quotes.page(params[:page]).per(params[:per_page] || 10)
     json_response(data: quotes, message: "Successfully fetched personal quotes")
   end
@@ -55,5 +55,9 @@ class QuotesController < ApplicationController
 
   def set_quote
     @quote = @current_user.quotes.find(params[:id])
+  end
+
+  def base_query
+    Quote.includes(:tags, :user).visible_to(@current_user)
   end
 end
