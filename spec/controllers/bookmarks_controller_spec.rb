@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe BookmarksController, type: :controller do
+RSpec.describe Api::BookmarksController, type: :controller do
 
 end

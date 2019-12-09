@@ -1,4 +1,5 @@
-class QuotesController < ApplicationController
+class Api::QuotesController < ApplicationController
+  # skip_before_action :authorize_api_request, only: [:index, :show]
   before_action :set_quote, only: [:update, :destroy]
 
   def index

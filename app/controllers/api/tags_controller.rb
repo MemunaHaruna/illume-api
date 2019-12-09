@@ -1,4 +1,4 @@
-class TagsController < ApplicationController
+class Api::TagsController < ApplicationController
   def index
     tags = Tag.filter_by_name(params[:query] || '')
     tags = tags.page(params[:page]).per(params[:per_page] || 50)
