@@ -9,7 +9,7 @@ class Quote < ApplicationRecord
   enum source_type: %w[Original, Book, Movie, Song, Talk, Article, Journal, Other]
 
   scope :visible_to, -> (current_user){ open.or(where(user: current_user))}
-  scope :recent_first, -> { order("id DESC") }
+  scope :recent_first, -> { order("quotes.id DESC") }
 
   before_save :titlecase_author_and_title
 

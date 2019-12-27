@@ -1,4 +1,6 @@
 class Api::TagsController < ApplicationController
+  skip_before_action :authorize_api_request, only: :index
+
   def index
     tags = Tag.filter_by_name(params[:query] || '')
     tags = tags.page(params[:page]).per(params[:per_page] || 50)

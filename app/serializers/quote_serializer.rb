@@ -1,6 +1,10 @@
 class QuoteSerializer < ActiveModel::Serializer
-  attributes :id, :content, :author, :source_type, :source_title, :link_to_source
+  attributes :id, :content, :source_type, :source_title, :link_to_source, :is_qotd
 
   belongs_to :user
   has_many :tags
+
+  attribute :author do
+    object.author.presence || 'Unknown'
+  end
 end
