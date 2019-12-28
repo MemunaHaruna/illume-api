@@ -10,7 +10,7 @@ user = User.create!(first_name: 'muna', last_name: 'haruna', email: 'mmharuna16@
                     unique_id: 'test', provider: 'test', avatar_url: 'test')
 
 tags = %w(Love Life Inspirational Humor Philosophy Religion Wisdom Truth Romance Death Happiness
-          Hope Faith Poetry Inspiration Writing Success God Motivational Time Knowledge
+          Hope Faith Poetry Career Writing Success God Motivational Time Knowledge
           Spirituality Science Fashion Education Programming Technology Poverty Politics Business
           Food Art Dance Music Biology Physics Nature War Intelligence Books AI
         )
@@ -200,7 +200,6 @@ quotes = [
   {
     user_id: user.id,
     content: "At my signal, unleash hell.",
-    author: 'Mark Twain',
     access: 0,
     source_type: 2,
     source_title: "Gladiator, 2000",
@@ -546,7 +545,7 @@ quotes = [
     source_title: "Confessions",
     link_to_source: "https://www.goodreads.com/book/show/27037.Confessions",
     access: 0,
-    tag_ids: [4, 6]
+    tag_ids: [6]
   },
   {
     user_id: user.id,

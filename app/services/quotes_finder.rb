@@ -20,35 +20,35 @@ class QuotesFinder
   attr_reader :params, :base_query
 
   def filter_by_tag(query)
-    if params[:tags]
+    if params[:tags].presence
       query = query.where(tags: {id: params[:tags]})
     end
     query
   end
 
   def filter_by_author(query)
-    if params[:author]
+    if params[:author].presence
       query = query.where("author LIKE ? ", "%#{params[:author].titlecase}%")
     end
     query
   end
 
   def filter_by_source_title(query)
-    if params[:source_title]
+    if params[:source_title].presence
       query = query.where("source_title LIKE ? ", "%#{params[:source_title].titlecase}%")
     end
     query
   end
 
   def filter_by_quote_text(query)
-    if params[:quote_text]
+    if params[:quote_text].presence
       query = query.where("content LIKE ? ",  "%#{params[:quote_text]}%")
     end
     query
   end
 
   def filter_by_all_params(query)
-    if params[:q]
+    if params[:q].presence
       query = query.where("source_title LIKE ? ", "%#{params[:q].titlecase}%")
       .or(query.where("author LIKE ? ", "%#{params[:q].titlecase}%"))
       .or(query.where("content LIKE ? ",  "%#{params[:q]}%"))
