@@ -51,7 +51,7 @@ class Api::QuotesController < ApplicationController
   private
 
   def quote_params
-    params.permit(:content, :author, :source_type, :source_title, :link_to_source, :access)
+    params.permit(:content, :author, :source_type, :source_title, :link_to_source, :access, {:tag_ids => []})
   end
 
   def set_quote
