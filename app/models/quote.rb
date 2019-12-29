@@ -24,6 +24,7 @@ class Quote < ApplicationRecord
     # Should this be saved in the database? yes, until I can find a better way
     # How to resolve the issue where the same qotd may appear on more than 1 day since it depends on no. of bookmarks?
     # What if no quote has been bookmarked?
+    # TO-DO: send qotd_notification with Actioncable
   end
 
   def titlecase_author_and_title

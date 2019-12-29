@@ -3,7 +3,7 @@ class Api::HomeController < ApplicationController
 
   def index
     quotes = QuotesFinder.new(params: params, base_query: base_query).filter
-    quotes = quotes.page(params[:page]).per(params[:per_page] || 10)
+    quotes = quotes.page(params[:page]).per(params[:per_page] || 15)
     json_response(status: :ok, data: quotes, message: "Welcome to Illume API!")
   end
 
