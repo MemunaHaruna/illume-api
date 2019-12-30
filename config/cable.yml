@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  url: redis://redistogo:70920c65a556f431329f63f0555afbad@hammerjaw.redistogo.com:9713/
   channel_prefix: illume-api_production
