@@ -10,6 +10,6 @@ class Api::HomeController < ApplicationController
   private
 
   def base_query
-    Quote.includes(:tags, :user).visible_to(@current_user)
+    Quote.includes(:tags, :user).where(access: 0)
   end
 end

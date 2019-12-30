@@ -2,7 +2,11 @@ class Api::UsersController < ApplicationController
   before_action :set_user, only: [:show, :quotes]
 
   def show
-    json_response(data: @user, message: "Successfully fetched User")
+    token = Auth::AuthenticateUser.new(@user.id).call
+    json_auth_response(token: token,
+      user: UserSerializer.new(@user),
+      message: "Successfully fetched User"
+    )
   end
 
   def quotes
