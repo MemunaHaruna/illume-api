@@ -1,6 +1,7 @@
 module Auth
   class JsonWebToken
-    JWT_SECRET = Rails.application.secrets.secret_key_base
+    JWT_SECRET = Rails.application.credentials.secret_key_base
+    # OLD: Rails.application.secrets.secret_key_base
 
     def self.encode(payload, expiry = 24.hours.from_now)
       payload[:expiry] = expiry.to_i
