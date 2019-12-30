@@ -1,6 +1,6 @@
 class Quote < ApplicationRecord
   belongs_to :user
-  has_many :bookmarks
+  has_many :bookmarks, dependent: :destroy
   has_and_belongs_to_many :tags
 
   validates_presence_of :content

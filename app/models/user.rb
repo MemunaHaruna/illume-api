@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :quotes
-  has_many :bookmarks
+  has_many :quotes, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   validates_presence_of :email, :provider, :unique_id
   # validates_uniqueness_of :email

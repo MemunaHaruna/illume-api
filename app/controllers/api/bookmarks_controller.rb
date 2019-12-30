@@ -8,12 +8,15 @@ class Api::BookmarksController < ApplicationController
   end
 
   def create
-    bookmark = @current_user.bookmarks.new(bookmark_params)
-    if bookmark.save
+    bookmark = Bookmark
+                .where(user_id: current_user.id, quote_id: params[:quote_id])
+                .first_or_create!
+    # bookmark = @current_user.bookmarks.new(bookmark_params)
+    if bookmark
       json_response(data: bookmark, message: "Successfully created a bookmark")
-    else
-      json_error_response(message: "Error creating bookmark", error: bookmark.errors.full_messages)
     end
+  rescue => error
+    json_error_response(message: "Error creating bookmark", errors: error.message)
   end
 
   def destroy
