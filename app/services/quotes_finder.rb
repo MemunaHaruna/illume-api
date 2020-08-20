@@ -1,4 +1,5 @@
 class QuotesFinder
+  # TO-DO: replace current filter with Postgres full-text search index
   def initialize(params:, base_query:)
     @params = params || {}
     @base_query = base_query || Quote.includes(:tags, :user).all
@@ -28,32 +29,31 @@ class QuotesFinder
 
   def filter_by_author(query)
     if params[:author].presence
-      query = query.where("author LIKE ? ", "%#{params[:author].titlecase}%")
+      query = query.where("author iLIKE ? ", "%#{params[:author].titlecase}%")
     end
     query
   end
 
   def filter_by_source_title(query)
     if params[:source_title].presence
-      query = query.where("source_title LIKE ? ", "%#{params[:source_title].titlecase}%")
+      query = query.where("source_title iLIKE ? ", "%#{params[:source_title].titlecase}%")
     end
     query
   end
 
   def filter_by_quote_text(query)
     if params[:quote_text].presence
-      query = query.where("content LIKE ? ",  "%#{params[:quote_text]}%")
+      query = query.where("content iLIKE ? ",  "%#{params[:quote_text]}%")
     end
     query
   end
 
   def filter_by_all_params(query)
     if params[:q].presence
-      query = query.where("source_title LIKE ? ", "%#{params[:q].titlecase}%")
-      .or(query.where("author LIKE ? ", "%#{params[:q].titlecase}%"))
-      .or(query.where("content LIKE ? ",  "%#{params[:q]}%"))
+      query = query.where("source_title iLIKE ? ", "%#{params[:q].titlecase}%")
+      .or(query.where("author iLIKE ? ", "%#{params[:q].titlecase}%"))
+      .or(query.where("content iLIKE ? ",  "%#{params[:q]}%"))
     end
     query
   end
 end
-

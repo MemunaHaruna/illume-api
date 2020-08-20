@@ -12,7 +12,8 @@ class Api::UsersController < ApplicationController
   def quotes
     quotes_list = QuotesFinder.new(params: params, base_query: base_query).filter
     quotes_list = quotes_list.page(params[:page]).per(params[:per_page] || 10)
-    json_response(data: quotes_list, message: "Successfully fetched quotes for User")
+    json_response(data: quotes_list, current_user: @current_user,
+      message: "Successfully fetched quotes for User")
   end
 
   private

@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
       user: UserSerializer.new(user),
       message: 'Successfully logged in'
     }.to_json
+
     ActionCable.server.broadcast("auth_channel_#{socket_id}", response)
   rescue => error
     json_error_response(message: "Error logging in", errors: error)
@@ -29,4 +30,3 @@ class SessionsController < ApplicationController
     params[:socketId] || request.env["omniauth.params"]["socketId"]
   end
 end
-

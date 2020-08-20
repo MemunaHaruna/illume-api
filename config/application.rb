@@ -16,7 +16,7 @@ require "action_cable/engine"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-require_relative '../app/middlewares/auth_connection'
+# require_relative '../app/middlewares/auth_connection'
 
 module IllumeApi
   class Application < Rails::Application
@@ -34,6 +34,6 @@ module IllumeApi
     config.api_only = true
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
-    config.middleware.use AuthConnection
+    # config.middleware.use AuthConnection
   end
 end
