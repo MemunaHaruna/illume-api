@@ -32,4 +32,8 @@ class Quote < ApplicationRecord
     self.author = author.titlecase if author
     self.source_title = source_title.titlecase if source_title
   end
+
+  def bookmarked_by?(user)
+    bookmarks.where(user_id: user.id).any?
+  end
 end

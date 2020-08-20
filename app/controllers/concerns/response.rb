@@ -7,9 +7,9 @@ module Response
     render json: {token: token, user: user, message: message}, status: status
   end
 
-  def json_response(message: 'Success', status: :ok, data: nil, show_children: true)
+  def json_response(message: 'Success', status: :ok, data: nil, show_children: true, current_user: nil)
     if data.respond_to? :size
-      return render json: data, show_children: show_children,
+      return render json: data, show_children: show_children, option_name: current_user,
              meta: {
                message: message,
                pagination: pagination_dict(data)

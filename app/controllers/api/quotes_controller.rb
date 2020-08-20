@@ -10,25 +10,28 @@ class Api::QuotesController < ApplicationController
 
   def show
     quote = base_query.find(params[:id])
-    json_response(data: quote, message: "Successfully fetched a quote")
+    json_response(data: quote, current_user: @current_user, message: "Successfully fetched a quote")
   end
 
   def personal_quotes
     quotes = QuotesFinder.new(params: params, base_query: @current_user.quotes).filter
     quotes = quotes.page(params[:page]).per(params[:per_page] || 10)
-    json_response(data: quotes, message: "Successfully fetched personal quotes")
+    json_response(data: quotes, current_user: @current_user,
+      message: "Successfully fetched personal quotes")
   end
 
   def create
     new_quote = @current_user.quotes.create! quote_params
-    json_response(data: new_quote, message: "Successfully created a new quote")
+    json_response(data: new_quote, current_user: @current_user,
+      message: "Successfully created a new quote")
   rescue => error
     json_error_response(message: "Error while creating a quote", errors: error.message)
   end
 
   def update
     if @quote.update quote_params
-      json_response(data: @quote, message: "Successfully updated a quote")
+      json_response(data: @quote, current_user: @current_user,
+        message: "Successfully updated a quote")
     else
       json_error_response(message: "Error while updating a quote", errors: @quote.errors.full_messages)
     end
